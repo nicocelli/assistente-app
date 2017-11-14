@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  assistente-app:
+    image: assistente-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: node_modules/.bin/nodemon --exec npm start
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+    volumes:
+      - ./home/app/assistente:/app
+      - /home/app/assistente/app/node_modules
+  mongo:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"
